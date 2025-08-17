@@ -1,89 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const slidesContainer = document.querySelector('.slides');
-  const slides = slidesContainer ? slidesContainer.querySelectorAll('img') : [];
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  let currentIndex = 0;
+  const slider = document.getElementById('slider');
+  const images = slider.querySelectorAll('img');
+  const nextBtn = document.getElementById('next');
+  const prevBtn = document.getElementById('prev');
+  const dotsContainer = document.getElementById('slider-dots');
 
-  function showSlide(index) {
-    if (!slidesContainer) return;
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-    currentIndex = index;
-    slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-  }
+  let index = 0;
+  let interval;
 
-  if (prevBtn && nextBtn && slides.length > 0) {
-    prevBtn.addEventListener('click', () => {
-      showSlide(currentIndex - 1);
+  // Создание точек
+  images.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      index = i;
+      updateSlider();
     });
-
-    nextBtn.addEventListener('click', () => {
-      showSlide(currentIndex + 1);
-    });
-
-    // Автоматическая смена слайдов каждые 5 секунд
-    setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 5000);
-  }
-});
-
-
-
-
-const slider = document.getElementById('slider');
-const images = slider.querySelectorAll('img');
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-const dotsContainer = document.getElementById('slider-dots');
-
-let index = 0;
-
-// Создание точек
-images.forEach((_, i) => {
-  const dot = document.createElement('div');
-  dot.classList.add('dot');
-  if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => {
-    index = i;
-    updateSlider();
+    dotsContainer.appendChild(dot);
   });
-  dotsContainer.appendChild(dot);
-});
 
-function updateDots() {
-  const dots = dotsContainer.querySelectorAll('.dot');
-  dots.forEach(dot => dot.classList.remove('active'));
-  dots[index].classList.add('active');
-}
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
 
-function updateSlider() {
-  slider.style.transform = `translateX(-${index * 100}%)`;
-  updateDots();
-}
+  function updateSlider() {
+    slider.style.transform = `translateX(-${index * 100}%)`;
+    slider.style.transition = 'transform 0.3s ease';
+    updateDots();
+  }
 
-nextBtn.addEventListener('click', () => {
-  index = (index + 1) % images.length;
-  updateSlider();
-});
-
-prevBtn.addEventListener('click', () => {
-  index = (index - 1 + images.length) % images.length;
-  updateSlider();
-});
-
-// Автопрокрутка
-let interval = setInterval(() => {
-  index = (index + 1) % images.length;
-  updateSlider();
-}, 4000);
-
-// Пауза при наведении
-slider.parentElement.addEventListener('mouseenter', () => clearInterval(interval));
-slider.parentElement.addEventListener('mouseleave', () => {
-  interval = setInterval(() => {
+  function showNext() {
     index = (index + 1) % images.length;
     updateSlider();
-  }, 4000);
+  }
+
+  function showPrev() {
+    index = (index - 1 + images.length) % images.length;
+    updateSlider();
+  }
+
+  // Кнопки
+  nextBtn.addEventListener('click', showNext);
+  prevBtn.addEventListener('click', showPrev);
+
+  // Автопрокрутка
+  function startInterval() {
+    interval = setInterval(showNext, 4000);
+  }
+  startInterval();
+
+  slider.parentElement.addEventListener('mouseenter', () => clearInterval(interval));
+  slider.parentElement.addEventListener('mouseleave', startInterval);
+
+  // --- Свайпы ---
+  let startX = 0;
+  let isDragging = false;
+
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    slider.style.transition = 'none';
+  });
+
+  slider.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const diffX = currentX - startX;
+    const movePercent = (diffX / slider.offsetWidth) * 100; // переводим в %
+    slider.style.transform = `translateX(-${index * 100 - movePercent}%)`;
+  });
+
+  slider.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const endX = e.changedTouches[0].clientX;
+    const diffX = endX - startX;
+
+    if (diffX > 50) showPrev();
+    else if (diffX < -50) showNext();
+    else updateSlider(); // если свайп меньше порога, возвращаем на место
+  });
 });

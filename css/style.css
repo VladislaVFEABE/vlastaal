@@ -2801,935 +2801,166 @@ select:focus, input[type="number"]:focus {
   margin-top: 15px;
 }
 
-/* ========== МОБИЛЬНЫЙ АДАПТИВ ========== */
-@media (max-width: 480px) {
-  /* Хедер */
+/* === Общие стили === */
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+/* Гамбургер (по умолчанию скрыт на ПК) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+.hamburger div {
+  height: 3px;
+  background-color: #222;
+  border-radius: 2px;
+}
+
+/* Меню на ПК */
+#nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* === Мобильная адаптация для экрана до 768px === */
+@media screen and (max-width: 768px) {
+
+  /* Основной хедер */
   .header-main {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    text-align: center;
-    padding: 10px;
-  }
-
-  .header-main h1 {
-    font-size: 20px;
-    margin: 0;
-  }
-
-  /* Соцсети */
-  .social-container {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-  }
-
-  .social-container .header-slogan {
-    display: none;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 6px;
-  }
-
-  .social-icon {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Меню */
-  nav {
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 5px;
+    padding: 5px 10px;
   }
 
-  nav a {
-    font-size: 13px;
-    padding: 4px 6px;
-    background: #f4f4f4;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #333;
+  /* Гамбургер */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 10;
   }
-
-  nav a:hover {
-    background: #ddd;
+  .hamburger span {
+    display: block;
+    height: 3px;
+    background: #000;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
   /* Логотип и телефоны */
   .header-logo-block {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    align-items: flex-end;
+    margin-left: auto;
   }
+  .header-logo { max-width: 60px; margin-bottom: 3px; }
+  .header-phones { font-size: 12px; text-align: right; }
 
-  .header-logo {
-    max-width: 60px;
-  }
-
-  .header-phones p {
-    font-size: 12px;
-    margin: 0;
-  }
-
-  .messenger-links {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-  }
-
-  .messenger-icon {
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Контент */
-  .main-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .main-text h2 {
-    font-size: 18px;
-  }
-
-  .main-text p, .features li {
-    font-size: 13px;
-  }
-
-  .features li {
-    margin-bottom: 3px;
-  }
-
-  /* Слайдер */
-  .slider-container img {
-    width: 100%;
-    height: auto;
-  }
-
-  .slider-btn {
-    font-size: 18px;
-    padding: 4px 6px;
-  }
-
-  .slider-dots {
-    gap: 3px;
-  }
-}
-
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .header-main {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .header-main h1 {
-    font-size: 22px;
-  }
-
-  nav a {
-    font-size: 14px;
-    padding: 5px 8px;
-  }
-
-  .main-text h2 {
-    font-size: 20px;
-  }
-
-  .main-text p, .features li {
-    font-size: 14px;
-  }
-}
-
-/* ========== МОБИЛЬНЫЙ АДАПТИВ ДЛЯ ВСЕХ УСТРОЙСТВ ========== */
-@media (max-width: 480px) {
-
-  /* Хедер */
-  .header-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .header-main h1 {
-    font-size: 20px;
-    margin: 0;
-  }
-
-  .social-container {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .social-container .header-slogan {
+  /* Меню */
+  #nav-menu {
     display: none;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 6px;
-  }
-
-  .social-icon {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Меню компактное */
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 5px;
-  }
-
-  nav a {
-    font-size: 13px;
-    padding: 4px 6px;
-    border-radius: 4px;
-    background: #f4f4f4;
-    text-decoration: none;
-    color: #333;
-  }
-
-  nav a:hover {
-    background: #ddd;
-  }
-
-  /* Логотип + телефоны */
-  .header-logo-block {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .header-logo {
-    max-width: 60px;
-  }
-
-  .header-phones p {
-    font-size: 12px;
-    margin: 0;
-  }
-
-  .messenger-links {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-  }
-
-  .messenger-icon {
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Каталог */
-  .catalog {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 10px;
-  }
-
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px;
-    background: #fff;
     width: 100%;
-  }
-
-  .product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-
-  .card-content h2 {
-    font-size: 16px;
-    margin-bottom: 4px;
-  }
-
-  .card-content p {
-    font-size: 13px;
-    line-height: 1.3;
-  }
-
-  .price {
-    font-weight: bold;
-    font-size: 14px;
-  }
-
-  .toggle-fabrics {
-    font-size: 12px;
-    padding: 4px 6px;
-    margin-top: 4px;
-    border: none;
-    border-radius: 4px;
-    background: #eee;
-    cursor: pointer;
-  }
-
-  /* Горизонтальный скролл тканей */
-  .fabric-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 6px;
-    margin-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .fabric-list img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 4px;
-    flex-shrink: 0;
-  }
-
-  .fabric-list.hidden {
-    display: none;
-  }
-
-  /* Слайдер и основной контент */
-  .main-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-/* Для чуть больших экранов (планшеты) */
-@media (min-width: 481px) and (max-width: 768px) {
-  .product-card {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .card-content h2 {
-    font-size: 18px;
-  }
-
-  .card-content p {
-    font-size: 14px;
-  }
-
-  .price {
-    font-size: 16px;
-  }
-
-  .toggle-fabrics {
-    font-size: 13px;
-    padding: 5px 8px;
-  }
-
-  .fabric-list img {
-    width: 100px;
-    height: 100px;
-  }
-}
-/* ========== МОБИЛЬНЫЙ АДАПТИВ КАЛЬКУЛЯТОРА ========== */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  h2, h3 {
-    font-size: 18px;
-    text-align: center;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-
-  input[type="number"],
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    margin-top: 4px;
-    box-sizing: border-box;
-  }
-
-  button {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  #formsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
     margin-top: 10px;
   }
+  #nav-menu.active { display: flex; max-height: 1000px; }
 
-  /* Модальное окно */
-  #orderModal {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #orderModal > div {
-    width: 90%;
-    max-width: 350px;
-  }
-
-  #orderModal input {
-    width: 100%;
-  }
-}
-
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .container {
-    padding: 15px;
-    font-size: 15px;
-  }
-
-  h2, h3 {
-    font-size: 20px;
-  }
-
-  input[type="number"],
-  input[type="text"] {
-    font-size: 15px;
-  }
-
-  button {
-    font-size: 15px;
-    padding: 10px 12px;
-  }
-
-  #formsContainer {
-    gap: 10px;
-  }
-
-  #orderModal > div {
-    max-width: 400px;
-  }
-}
-/* ========== МОБИЛЬНЫЙ АДАПТИВ GALLERY PAGE ========== */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
+  #nav-menu a {
+    padding: 8px 5px;
     font-size: 14px;
-  }
-
-  .section-title {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .btn-instruction {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
     text-decoration: none;
-  }
-
-  .btn-instruction:hover {
-    background-color: #0056b3;
-  }
-
-  .gallery-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .gallery-card {
-    width: 100%;
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-
-  /* Header adjustments */
-  .header-main {
-    flex-direction: column;
-    align-items: center;
+    border-radius: 4px;
+    background: #f5f5f5;
+    margin: 2px 0;
     text-align: center;
   }
 
-  nav {
+  /* Соцсети в меню */
+  .social-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
-    margin: 10px 0;
+    margin-bottom: 5px;
   }
+/* Контейнер соцсетей */
+.social-links {
+  display: flex;
+  gap: 8px;
+}
 
-  nav a {
-    font-size: 14px;
-    padding: 5px 8px;
-  }
+/* Каждая иконка */
+.social-links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff; /* если хочешь белый фон */
+  text-decoration: none;
+}
 
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
+/* Цвет иконок по фирменным цветам */
+.social-links a.instagram i { color: #E1306C; }
+.social-links a.facebook i { color: #1877F2; }
+.social-links a.tiktok i { color: #000000; }
+.social-links a.odnoklassniki i { color: #F48020; }
 
+  /* Мессенджеры под соцсетями */
   .messenger-links {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  .header-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 5px;
-  }
-
-  .header-phones p {
-    margin: 2px 0;
-    font-size: 13px;
-  }
-}
-
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .container {
-    padding: 15px;
-    font-size: 15px;
-  }
-
-  .section-title {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .btn-instruction {
-    font-size: 15px;
-    padding: 10px 12px;
-    width: auto;
-  }
-
-  .gallery-row {
-    display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
-  }
-
-  .gallery-card {
-    flex: 1 1 45%;
-    max-width: 45%;
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-  }
-}
-/* ========== МОБИЛЬНЫЙ АДАПТИВ GALLERY PAGE - INSTRUCTION ========== */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .section-title {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .gallery-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .gallery-card {
-    width: 100%;
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-
-  /* Header */
-  .header-main {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin: 10px 0;
-  }
-
-  nav a {
-    font-size: 14px;
-    padding: 5px 8px;
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .messenger-links {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
     margin-top: 5px;
   }
-
-  .header-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 5px;
+  .messenger-links a i {
+    font-size: 16px;
   }
 
-  .header-phones p {
-    margin: 2px 0;
-    font-size: 13px;
-  }
-}
 
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .container {
-    padding: 15px;
-    font-size: 15px;
-  }
-
-  .section-title {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .gallery-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .gallery-card {
-    flex: 1 1 45%;
-    max-width: 45%;
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-  }
-}
-/* ========== МОБИЛЬНЫЙ АДАПТИВ CONTACTS PAGE ========== */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .section-title, h2 {
-    font-size: 18px;
-    text-align: center;
+.header-slogan {
+    font-weight: bold;
+    font-size: 16px;
     margin-bottom: 10px;
-  }
-
-  .contact-info ul {
-    padding-left: 10px;
-  }
-
-  .contact-info li {
-    margin-bottom: 10px;
-  }
-
-  .address-list li {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5px;
-  }
-
-  .phone-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .phone-row {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-  }
-
-  .phone-icon {
-    width: 20px;
-    height: auto;
-  }
-
-  .social-links-colored {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  /* Header */
-  .header-main {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    margin: 10px 0;
-  }
-
-  nav a {
-    font-size: 14px;
-    padding: 5px 8px;
-  }
-
-  .social-links {
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .messenger-links {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  .header-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 5px;
-  }
-
-  .header-phones p {
-    margin: 2px 0;
-    font-size: 13px;
-  }
-
-  /* Модальное окно */
-  #custom-modal-window {
-    padding: 10px;
-  }
-
-  .custom-modal-box {
-    width: 90%;
-  }
-
-  #custom-map-container {
-    width: 100%;
-    height: 200px;
-  }
+    padding-left: 10px; /* сдвиг вправо */
+    display: inline-block; /* чтобы отступ работал корректно */
 }
 
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .container {
-    padding: 15px;
-    font-size: 15px;
-  }
+  
+  /* Слайдер */
+  .main-slider { width: 100%; overflow: hidden; margin-top: 10px; }
+  .slider-container img { width: 100%; height: auto; }
 
-  h2 {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .address-list li {
-    font-size: 15px;
-  }
-
-  .phone-row {
-    font-size: 14px;
-  }
-
-  #custom-map-container {
-    width: 100%;
-    height: 250px;
-  }
-}
-/* ========== МОБИЛЬНЫЙ АДАПТИВ FAQ PAGE ========== */
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  h2 {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .faq-item summary {
-    font-size: 14px;
-    padding: 8px 10px;
-    cursor: pointer;
-    background: #f3f3f3;
-    border-radius: 5px;
-  }
-
-  .faq-item p {
-    font-size: 13px;
-    padding: 6px 10px 8px;
-    margin: 0;
-    background: #fafafa;
-    border-left: 3px solid #007bff;
-    border-radius: 0 0 5px 5px;
-  }
-
-  /* Header */
-  .header-main {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    margin: 10px 0;
-  }
-
-  nav a {
-    font-size: 14px;
-    padding: 5px 8px;
-  }
-
-  .social-links {
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .messenger-links {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  .header-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 5px;
-  }
-
-  .header-phones p {
-    margin: 2px 0;
-    font-size: 13px;
-  }
+  /* Текстовый блок */
+  .main-text h2 { font-size: 20px; margin: 5px 0; }
+  .main-text p, .main-text li { font-size: 18px; line-height: 1.3; }
+  .features li { margin-bottom: 4px; }
 }
 
-/* Планшеты */
-@media (min-width: 481px) and (max-width: 768px) {
-  .container {
-    padding: 15px;
-    font-size: 15px;
-  }
-
-  h2 {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .faq-item summary {
-    font-size: 15px;
-    padding: 10px 12px;
-  }
-
-  .faq-item p {
-    font-size: 14px;
-    padding: 8px 12px 10px;
-  }
-}
